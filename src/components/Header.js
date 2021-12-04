@@ -1,11 +1,12 @@
 import {
   AppBar,
   Container,
+  createTheme,
   MenuItem,
   Select,
   Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,31 +25,38 @@ const useStyles = makeStyles(() => ({
     fontWeight: "bold",
     cursor: "pointer",
   },
-  selectBox: {
-    borderColor: "red",
-  },
 }));
 const Header = () => {
   const classess = useStyles();
   const navigate = useNavigate();
+  const darkTheme = createTheme({
+    palette: {
+      primary: {
+        main: "#fff",
+      },
+      type: "dark",
+    },
+  });
   const HandlClick = () => {
     return navigate("/");
   };
   return (
-    <AppBar color="transparent" position="static ">
-      <Container className={classess.AppBox}>
-        <Typography onClick={HandlClick} className={classess.title}>
-          Crypto Hunter
-        </Typography>
-        <Select
-          variant="outlined"
-          style={{ width: "100", height: 40, marginLeft: 15 }}
-        >
-          <MenuItem value="USD">USD</MenuItem>
-          <MenuItem value="INR">INR</MenuItem>
-        </Select>
-      </Container>
-    </AppBar>
+    <ThemeProvider theme={darkTheme}>
+      <AppBar color="transparent" position="static ">
+        <Container className={classess.AppBox}>
+          <Typography onClick={HandlClick} className={classess.title}>
+            Crypto Hunter
+          </Typography>
+          <Select
+            variant="outlined"
+            style={{ width: "100", height: 40, marginLeft: 15 }}
+          >
+            <MenuItem value="USD">USD</MenuItem>
+            <MenuItem value="INR">INR</MenuItem>
+          </Select>
+        </Container>
+      </AppBar>
+    </ThemeProvider>
   );
 };
 
