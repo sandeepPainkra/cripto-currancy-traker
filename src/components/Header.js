@@ -9,6 +9,7 @@ import {
 import { makeStyles, ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { CryptoState } from "../CriptoContext";
 
 const useStyles = makeStyles(() => ({
   AppBox: {
@@ -40,6 +41,9 @@ const Header = () => {
   const HandlClick = () => {
     return navigate("/");
   };
+
+  const { currancy, setCurrancy } = CryptoState();
+  console.log(currancy);
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar color="transparent" position="static ">
@@ -50,6 +54,10 @@ const Header = () => {
           <Select
             variant="outlined"
             style={{ width: "100", height: 40, marginLeft: 15 }}
+            value={currancy}
+            onChange={(e) => {
+              setCurrancy(e.target.value);
+            }}
           >
             <MenuItem value="USD">USD</MenuItem>
             <MenuItem value="INR">INR</MenuItem>
