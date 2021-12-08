@@ -27,16 +27,7 @@ const useStyles = makeStyles(() => ({
 }));
 const Banner = () => {
   const classess = useStyles();
-  const { currancy } = CryptoState();
-  const [tranding, setTranding] = useState([]);
-  const FetchApiData = async () => {
-    const { data } = await axios.get(TrendingCoins(currancy));
-    setTranding(data);
-  };
-  useEffect(() => {
-    FetchApiData();
-  }, [currancy]);
-  console.log(tranding);
+
   return (
     <>
       <div className={classess.Banner}>
